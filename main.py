@@ -55,12 +55,12 @@ from tensorflow.keras.activations import tanh
 
 inputs=Input(shape=(750,4))
 x=RNN(ManteCell(100),time_major = False)(inputs)
-x=Activation(tanh)(x)
-outputs=Dense(1,activation='linear')(x)
+x=Activation(tanh)(x) # generate r
+outputs=Dense(1,activation='linear')(x) # z=w_z x+c_z
 model=Model(inputs,outputs)
 
 
-optimizer = tf.keras.optimizers.Adam(1e-4)
+optimizer = tf.keras.optimizers.Adam(1e-3)
 model.compile(optimizer=optimizer, loss='mse')
 model.fit(train_dataset,validation_data=valid_dataset,epochs=2)
 
